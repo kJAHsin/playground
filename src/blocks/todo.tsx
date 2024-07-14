@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import Todo from "../classes/todo-item";
+import { useEffect, useState, FormEvent } from "react";
+import Todo from "../classes/todo-item.tsx";
 
 export default function Block() {
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState<Array<string | Todo | any>>([]);
 	const [isValid, setIsValid] = useState(false);
 
-	function addListItem(e) {
+	function addListItem(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		const form = document.querySelector("form");
-		const inputs = document.querySelectorAll(
+		const form: HTMLFormElement | null = document.querySelector("form");
+		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(
 			'form > input:not([type="submit"])'
 		);
-		const itemName = form.todo.value;
-		const fullDate = form.date.value;
+		const itemName = form?.todo.value;
+		const fullDate = form?.date.value;
 
 		if (!itemName || !fullDate) return;
 		const dateObj = new Date(fullDate);
@@ -33,25 +33,27 @@ export default function Block() {
 	function checkValidity() {
 		const form = document.querySelector("form");
 
-		!(form.todo.value && form.date.value)
+		!(form?.todo.value && form?.date.value)
 			? setIsValid(false)
 			: setIsValid(true);
 	}
 
 	useEffect(() => {
-		const itemList = document.querySelector(".list");
-		itemList.innerHTML = "";
-		if (todos.length === 0) return;
-		for (let i = 0; i < todos.length; i++) {
-			todos[i].addListItem();
+		const itemList: HTMLElement | null = document.querySelector(".list");
+		if (itemList) {
+			itemList.innerHTML = "";
+			if (todos.length === 0) return;
+			for (let i = 0; i < todos.length; i++) {
+				todos[i].addListItem();
+			}
 		}
 	}, [todos]);
 
 	useEffect(() => {
 		const form = document.querySelector("form");
 		isValid
-			? form.classList.remove("invalid")
-			: form.classList.add("invalid");
+			? form?.classList.remove("invalid")
+			: form?.classList.add("invalid");
 	}, [isValid]);
 
 	return (

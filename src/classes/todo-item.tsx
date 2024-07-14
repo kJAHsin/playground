@@ -1,5 +1,17 @@
 export default class Todo {
-	constructor(name, weekday, date, month, year) {
+	public name: string;
+	public weekday: string;
+	public date: number;
+	public month: string;
+	public year: number;
+
+	constructor(
+		name: string,
+		weekday: string,
+		date: number,
+		month: string,
+		year: number
+	) {
 		this.name = name;
 		this.weekday = weekday;
 		this.date = date;
@@ -7,9 +19,9 @@ export default class Todo {
 		this.year = year;
 	}
 
-	addListItem() {
+	addListItem(): void {
 		if (!this.name || !this.date) return;
-		const list = document.querySelector(".list");
+		const list: Element | any = document.querySelector(".list");
 		const newListItem = document.createElement("li");
 		newListItem.setAttribute("title", this.name);
 		newListItem.innerHTML = `
