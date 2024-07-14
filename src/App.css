@@ -71,11 +71,15 @@
 		background-image: url(../public/skinnyK_logo.svg);
 		background-repeat: no-repeat;
 		background-size: 100%;
-		width: 4rem;
+		width: calc(3rem + 3vw);
 		aspect-ratio: 1;
 		position: absolute;
 		inset: 3vw auto auto 50%;
 		translate: -50%;
+
+		/* @media (max-width: 550px) {
+			width: 3.5rem;
+		} */
 	}
 }
 
