@@ -9,6 +9,9 @@ export default function Block() {
 		e.preventDefault();
 
 		const form = document.querySelector("form");
+		const inputs = document.querySelectorAll(
+			'form > input:not([type="submit"])'
+		);
 		const itemName = form.todo.value;
 		const fullDate = form.date.value;
 
@@ -23,6 +26,8 @@ export default function Block() {
 
 		const todoItem = new Todo(itemName, weekday, date, month, year);
 		setTodos([...todos, todoItem]);
+
+		inputs.forEach((i) => (i.value = ""));
 	}
 
 	function checkValidity() {
@@ -55,7 +60,7 @@ export default function Block() {
 			<div className="container">
 				<h2>You&apos;ve got stuff to do:</h2>
 				<button
-					className="clearBtn"
+					className="clear-btn"
 					onClick={() => {
 						setTodos([]);
 					}}
@@ -68,6 +73,7 @@ export default function Block() {
 						name="todo"
 						id="todoEl"
 						aria-label="enter an item"
+						placeholder="Enter your todo"
 						onChange={() => checkValidity()}
 					/>
 					<input
@@ -84,6 +90,11 @@ export default function Block() {
 						aria-label="add new item to list"
 					/>
 				</form>
+			</div>
+			<div className="sort-btns">
+				<span>Sort Todos by:</span>
+				<button>a-z</button>
+				<button>date</button>
 			</div>
 			<ul className="list"></ul>
 		</>

@@ -8,17 +8,12 @@
 		transition: all 320ms ease-in-out;
 	}
 
-	body {
-		min-height: 100vh;
-		position: relative;
-	}
-
 	.body {
 		box-sizing: border-box;
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 			Roboto, Oxygen, Ubuntu, sans-serif;
-		position: absolute;
-		inset: 0;
+		min-height: 100dvh;
+		position: relative;
 	}
 
 	a {
@@ -28,6 +23,7 @@
 	button,
 	[type="submit"] {
 		cursor: pointer;
+		font-weight: 600;
 	}
 
 	ul,
@@ -49,12 +45,8 @@
 @layer layout {
 	.body {
 		background-color: var(--clr-dark-bg);
+		padding-block-start: calc(3rem + 8vw);
 		color: var(--clr-light);
-	}
-
-	main {
-		margin: 5rem auto auto;
-		text-align: center;
 	}
 
 	input[type="submit"] {
@@ -68,7 +60,7 @@
 
 @layer logo {
 	.logo {
-		background-image: url(../public/skinnyK_logo.svg);
+		background-image: url(/skinnyK_logo.svg);
 		background-repeat: no-repeat;
 		background-size: 100%;
 		width: calc(3rem + 3vw);
@@ -76,16 +68,13 @@
 		position: absolute;
 		inset: 3vw auto auto 50%;
 		translate: -50%;
-
-		/* @media (max-width: 550px) {
-			width: 3.5rem;
-		} */
 	}
 }
 
 @layer todo {
 	.container,
-	.list {
+	.list,
+	.sort-btns {
 		--border-width: clamp(1px, 1vw, 2px);
 		--width: clamp(280px, 50dvw, 450px);
 		--padding: 1.125rem;
@@ -93,14 +82,14 @@
 		display: flex;
 		flex-direction: column;
 		border: var(--border-width) solid var(--clr-light);
-		padding: 1rem var(--padding) 1.5rem;
+		padding: 1rem var(--padding);
 		border-radius: var(--border-rad);
 		width: var(--width);
 		max-width: calc(100% - var(--border-width) * 3);
 	}
 
 	.container {
-		margin: calc(3rem + 8vw) auto 1rem;
+		margin: 0 auto 1rem;
 		position: relative;
 
 		h2 {
@@ -113,10 +102,10 @@
 			}
 		}
 
-		.clearBtn {
+		.clear-btn {
 			position: absolute;
 			inset: var(--padding) var(--padding) auto auto;
-			padding: 0.25em 0.75em;
+			padding: 0.5rem 2rem;
 			border-radius: var(--border-rad);
 			border: var(--border-width) solid var(--clr-dark-bg);
 
@@ -153,6 +142,10 @@
 				max-width: 100%;
 				outline: 2px solid transparent;
 
+				&::placeholder {
+					font-size: 0.75em;
+				}
+
 				&:focus-visible {
 					border-color: var(--clr-accent);
 					box-shadow: inset 2px 2px 1px var(--clr-light),
@@ -179,6 +172,11 @@
 				&:hover {
 					border-color: var(--clr-dark-bg);
 					outline-color: var(--clr-light);
+
+					&::placeholder {
+						transition: color 2200ms ease-in-out;
+						color: transparent;
+					}
 				}
 
 				&:last-of-type:active {
@@ -186,6 +184,38 @@
 					color: var(--clr-light);
 					border-color: var(--clr-accent);
 				}
+			}
+		}
+	}
+
+	.sort-btns {
+		margin: 1rem auto;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		gap: 0.75rem;
+
+		span {
+			margin-inline-end: auto;
+			color: var(--clr-accent);
+			font-weight: 700;
+			font-size: calc(0.625rem + 1vw);
+		}
+
+		button {
+			padding: 0.5rem 2rem;
+			border-radius: var(--border-rad);
+			border: var(--border-width) solid var(--clr-dark-bg);
+
+			&:hover,
+			&:focus-visible {
+				border-color: var(--clr-light);
+			}
+
+			&:active {
+				border-color: var(--clr-accent);
+				background-color: var(--clr-dark-bg);
+				color: var(--clr-light);
 			}
 		}
 	}
@@ -204,19 +234,28 @@
 		li {
 			display: flex;
 			justify-content: space-between;
+			align-items: baseline;
 			font-size: calc(0.75rem + 1vw);
 			line-height: 1.75;
-			border-radius: var(--border-rad);
 			padding: 0.125rem 0.75rem;
 			background-color: var(--clr-light);
 			color: var(--clr-dark-bg);
 			border-radius: var(--border-rad);
+			border: var(--border-width) solid var(--clr-dark-bg);
+
+			&:hover {
+				border-color: var(--clr-accent);
+			}
 
 			span:first-child {
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: clip;
 				width: 40%;
+			}
+
+			span:not(:first-child) {
+				font-size: 0.75em;
 			}
 		}
 	}
