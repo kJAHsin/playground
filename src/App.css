@@ -1,0 +1,202 @@
+@layer resets {
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+		margin: 0;
+		padding: 0;
+		transition: all 320ms ease-in-out;
+	}
+
+	body {
+		min-height: 100vh;
+		position: relative;
+	}
+
+	.body {
+		box-sizing: border-box;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, Oxygen, Ubuntu, sans-serif;
+		position: absolute;
+		inset: 0;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	button,
+	[type="submit"] {
+		cursor: pointer;
+	}
+
+	ul,
+	li {
+		list-style: none;
+	}
+}
+
+@layer variables {
+	#root {
+		--clr-dark-bg: rgb(35, 7, 35);
+		--clr-accent: rgb(138, 244, 100);
+		--clr-light: rgb(223, 223, 223);
+
+		--border-rad: calc(7px + 0.25em);
+	}
+}
+
+@layer layout {
+	.body {
+		background-color: var(--clr-dark-bg);
+		color: var(--clr-light);
+	}
+
+	main {
+		margin: 5rem auto auto;
+		text-align: center;
+	}
+
+	input[type="submit"] {
+		padding: 1rem 3rem;
+		font-size: 1.75rem;
+		font-weight: 600;
+		text-transform: capitalize;
+		border-radius: var(--border-rad);
+	}
+}
+
+@layer todo {
+	.container,
+	.list {
+		--border-width: clamp(1px, 1vw, 2px);
+		--width: clamp(280px, 50dvw, 600px);
+		--padding: 1.125rem;
+
+		display: flex;
+		flex-direction: column;
+		border: var(--border-width) solid var(--clr-light);
+		padding: 1rem var(--padding) 1.5rem;
+		border-radius: var(--border-rad);
+		width: var(--width);
+	}
+
+	.container {
+		margin: calc(3rem + 2vw) auto 1rem;
+		position: relative;
+
+		h2 {
+			color: var(--clr-accent);
+			margin-block: 0.25rem 1rem;
+
+			@media (max-width: 725px) {
+				margin-block-start: 1.5rem;
+			}
+		}
+
+		.clearBtn {
+			position: absolute;
+			inset: var(--padding) var(--padding) auto auto;
+			padding: 0.25em 0.75em;
+			border-radius: var(--border-rad);
+			border: var(--border-width) solid var(--clr-dark-bg);
+
+			&:hover,
+			&:focus-visible {
+				border-color: var(--clr-light);
+			}
+
+			&:active {
+				border-color: var(--clr-accent);
+				background-color: var(--clr-dark-bg);
+				color: var(--clr-light);
+			}
+		}
+
+		form {
+			display: grid;
+			gap: 0.75rem;
+
+			&.invalid [type="submit"] {
+				cursor: not-allowed;
+				user-select: none;
+			}
+
+			input {
+				background-color: var(--clr-light);
+				border: var(--border-width) solid var(--clr-light);
+				font-size: calc(0.75rem + 1vw);
+				line-height: 1.75;
+				border-radius: var(--border-rad);
+				padding: 0.125rem 0.75rem;
+				max-width: 100%;
+				outline: 2px solid transparent;
+
+				&:focus-visible {
+					border-color: var(--clr-accent);
+					box-shadow: inset 2px 2px 1px var(--clr-light),
+						inset 2px -2px 1px var(--clr-light),
+						inset -2px 2px 1px var(--clr-light),
+						inset -2px -2px 1px var(--clr-light),
+						inset 2px 4px rgb(from var(--clr-dark-bg) r g b / 0.35),
+						inset 2px -4px rgb(from var(--clr-dark-bg) r g b / 0.35),
+						inset -2px 4px rgb(from var(--clr-dark-bg) r g b / 0.35),
+						inset -2px -4px
+							rgb(from var(--clr-dark-bg) r g b / 0.35),
+						inset 6px 0px 4px 2px
+							rgb(from var(--clr-dark-bg) r g b / 0.1),
+						inset 6px -0px 4px 2px rgb(from var(--clr-dark-bg) r g b /
+									0.1),
+						inset -6px 0px 4px 2px rgb(from var(--clr-dark-bg) r g b /
+									0.1),
+						inset -6px -0px 4px 2px
+							rgb(from var(--clr-dark-bg) r g b / 0.1);
+					outline-color: rgb(from var(--clr-accent) r g b / 0.7);
+					outline-offset: 0.125rem;
+				}
+
+				&:hover {
+					border-color: var(--clr-dark-bg);
+					outline-color: var(--clr-light);
+				}
+
+				&:last-of-type:active {
+					background-color: var(--clr-dark-bg);
+					color: var(--clr-light);
+					border-color: var(--clr-accent);
+				}
+			}
+		}
+	}
+
+	.list {
+		margin: 1rem auto auto;
+
+		&:empty {
+			border-color: transparent;
+		}
+
+		> * + * {
+			margin-block-start: 0.75rem;
+		}
+
+		li {
+			display: flex;
+			justify-content: space-between;
+			font-size: calc(0.75rem + 1vw);
+			line-height: 1.75;
+			border-radius: var(--border-rad);
+			padding: 0.125rem 0.75rem;
+			background-color: var(--clr-light);
+			color: var(--clr-dark-bg);
+			border-radius: var(--border-rad);
+
+			span:first-child {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: clip;
+				width: 40%;
+			}
+		}
+	}
+}
