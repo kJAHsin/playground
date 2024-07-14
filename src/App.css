@@ -75,12 +75,6 @@
 	}
 }
 
-@keyframes pulseLogo {
-	to {
-		color: transparent;
-	}
-}
-
 @layer todo {
 	.container,
 	.list,
@@ -267,6 +261,24 @@
 			span:not(:first-child) {
 				font-size: 0.75em;
 			}
+		}
+	}
+}
+
+@layer reduced-motion {
+	@media (prefers-reduced-motion) {
+		*,
+		*::before,
+		*::after {
+			animation: none !important;
+		}
+	}
+}
+
+@layer animations {
+	@keyframes pulseLogo {
+		to {
+			color: transparent;
 		}
 	}
 }
