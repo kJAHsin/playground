@@ -51,6 +51,7 @@ export default function Block() {
 
 	return (
 		<>
+			<div className="logo"></div>
 			<div className="container">
 				<h2>You&apos;ve got stuff to do:</h2>
 				<button
