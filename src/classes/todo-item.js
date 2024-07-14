@@ -11,6 +11,7 @@ export default class Todo {
 		if (!this.name || !this.date) return;
 		const list = document.querySelector(".list");
 		const newListItem = document.createElement("li");
+		newListItem.setAttribute("title", this.name);
 		newListItem.innerHTML = `
         <span>${this.name}</span>
         <span>${this.month} ${this.date},${this.year}</span>
