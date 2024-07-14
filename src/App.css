@@ -70,7 +70,7 @@
 	.container,
 	.list {
 		--border-width: clamp(1px, 1vw, 2px);
-		--width: clamp(280px, 50dvw, 600px);
+		--width: clamp(280px, 50dvw, 450px);
 		--padding: 1.125rem;
 
 		display: flex;
@@ -79,18 +79,20 @@
 		padding: 1rem var(--padding) 1.5rem;
 		border-radius: var(--border-rad);
 		width: var(--width);
+		max-width: calc(100% - var(--border-width) * 3);
 	}
 
 	.container {
-		margin: calc(3rem + 2vw) auto 1rem;
+		margin: calc(3rem + 8vw) auto 1rem;
 		position: relative;
 
 		h2 {
 			color: var(--clr-accent);
 			margin-block: 0.25rem 1rem;
+			text-wrap: pretty;
 
 			@media (max-width: 725px) {
-				margin-block-start: 1.5rem;
+				margin-block-start: 1.75rem;
 			}
 		}
 
@@ -116,6 +118,8 @@
 		form {
 			display: grid;
 			gap: 0.75rem;
+			text-align: center;
+			padding-block-start: 0.75rem;
 
 			&.invalid [type="submit"] {
 				cursor: not-allowed;
