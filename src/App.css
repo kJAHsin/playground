@@ -46,7 +46,7 @@
 	.body {
 		grid-template-columns: repeat(auto-fill, 1fr);
 		background-color: var(--clr-dark-bg);
-		padding-block-start: 1px;
+		padding-block: 1px 6rem;
 		color: var(--clr-light);
 		font-family: var(--font-fam);
 	}
@@ -145,6 +145,7 @@
 				padding: 0.125rem 0.75rem;
 				max-width: 100%;
 				outline: 2px solid transparent;
+				transition: 300ms ease-in;
 
 				&::placeholder {
 					font-size: 0.75em;
@@ -256,6 +257,17 @@
 				text-overflow: ellipsis;
 				overflow: clip;
 				width: 40%;
+				transition: all 1s ease-out;
+			}
+
+			&:hover span:first-child,
+			&:focus span:first-child,
+			&:focus-within span:first-child {
+				white-space: wrap;
+				width: unset;
+				font-size: 0.75em;
+				padding-inline-end: 0.25rem;
+				text-wrap: balance;
 			}
 
 			span:not(:first-child) {

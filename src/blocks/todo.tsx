@@ -155,6 +155,7 @@ export default function Block() {
 						id="todoEl"
 						aria-label="enter an item"
 						placeholder="Enter your todo"
+						autoComplete="off"
 						onChange={() => checkValidity()}
 					/>
 					<input
